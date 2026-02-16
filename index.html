@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kenangan Kita</title>
+<style>
+body{margin:0;font-family: 'Segoe UI',sans-serif;background:linear-gradient(135deg,#ffd6e7,#e0f7ff);color:#333;overflow-x:hidden}
+header{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+h1{font-size:3em;margin:0}
+p{opacity:.8}
+button{padding:12px 22px;border:none;border-radius:25px;background:#ff7aa8;color:white;font-size:16px;cursor:pointer;margin:5px}
+.slider{position:relative;max-width:900px;margin:40px auto;overflow:hidden;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+.slide{display:none;text-align:center;background:white;padding:20px}
+.slide img,.slide video{max-width:100%;border-radius:15px}
+.active{display:block}
+.controls{text-align:center;margin-top:10px}
+.dots{position:fixed;top:15px;right:15px;font-size:26px;cursor:pointer}
+.menu{position:fixed;top:55px;right:15px;background:white;padding:15px;border-radius:15px;box-shadow:0 10px 25px rgba(0,0,0,.2);display:none;width:250px}
+textarea{width:100%;height:150px;border-radius:10px;border:1px solid #ccc;padding:10px}
+input[type=password]{width:100%;padding:8px;margin-bottom:8px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<audio id="bgm" autoplay loop>
+<source src="lagu.mp3" type="audio/mpeg">
+</audio><div class="dots" onclick="toggleMenu()">⋮</div>
+<div class="menu" id="menu">
+<h3>Halaman Cerita</h3>
+<input type="password" id="pass" placeholder="Masukkan password">
+<button onclick="cekPassword()">Masuk</button>
+<div id="storyBox" class="hidden">
+<textarea placeholder="Tulis cerita kenangan di sini..."></textarea>
+</div>
+</div><header>
+<h1>Kenangan Kita</h1>
+<p>Kumpulan foto & video perjalanan</p>
+<button onclick="scrollToSlider()">Lihat Kenangan</button>
+</header><div class="slider" id="slider">
+<div class="slide active">
+<img src="foto1.jpg">
+<p>Kenangan 1</p>
+</div>
+<div class="slide">
+<img src="foto2.jpg">
+<p>Kenangan 2</p>
+</div>
+<div class="slide">
+<img src="foto3.jpg">
+<p>Kenangan 3</p>
+</div>
+<div class="slide">
+<img src="foto4.jpg">
+<p>Kenangan 4</p>
+</div>
+<div class="slide">
+<img src="foto5.jpg">
+<p>Kenangan 5</p>
+</div>
+<div class="slide">
+<video controls>
+<source src="video1.mp4" type="video/mp4">
+</video>
+<p>Kenangan Video1</p>
+</div>
+<div class="slide">
+<video controls>
+<source src="video2.mp4" type="video/mp4">
+</video>
+<p>Kenangan Video2</p>
+</div>
+</div><div class="controls">
+<button onclick="prevSlide()">Kembali</button>
+<button onclick="nextSlide()">Lanjut</button>
+</div><script>
+let index=0;
+const slides=document.querySelectorAll('.slide');
+function showSlide(i){slides.forEach(s=>s.classList.remove('active'));slides[i].classList.add('active')}
+function nextSlide(){index=(index+1)%slides.length;showSlide(index)}
+function prevSlide(){index=(index-1+slides.length)%slides.length;showSlide(index)}
+function scrollToSlider(){document.getElementById('slider').scrollIntoView({behavior:'smooth'})}
+function toggleMenu(){const m=document.getElementById('menu');m.style.display=m.style.display==='block'?'none':'block'}
+function cekPassword(){if(document.getElementById('pass').value==='sayang'){document.getElementById('storyBox').classList.remove('hidden')}else{alert('Password salah!')}}
+</script></body>
+</html>
